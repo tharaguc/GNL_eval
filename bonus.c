@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tharaguc <tharaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 17:36:44 by tharaguc          #+#    #+#             */
-/*   Updated: 2022/05/08 19:30:08 by tharaguc         ###   ########.fr       */
+/*   Created: 2022/05/08 19:33:53 by tharaguc          #+#    #+#             */
+/*   Updated: 2022/05/08 19:50:25 by tharaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,32 @@
 
 int	main(void)
 {
-	int		fd;
-	char	*line;
-	int	i;
+	int		fd[3];
+	char	*line[3];
+	int	i, j;
 
-	i = 0;
-	fd = open("test.txt", O_RDONLY);
-	if (fd)
+	j = 0;
+	fd[0] = open("test.txt", O_RDONLY);
+	fd[1] = open("test1.txt", O_RDONLY);
+	fd[2] = open("test2.txt", O_RDONLY);
+	if (fd[0] && fd[1] && fd[2])
 	{
-		while (1)
+		while (j < 3)
 		{
-			line = get_next_line(fd);
-			if (line == NULL)
-			{
-				free(line);
-				break ;
+			i = 0;
+			while (i < 3) {	
+				line[i] = get_next_line(fd[i]);
+				printf("test%i >> %s", i, line[i]);
+				free(line[i]);
+				i++;
 			}
-			printf("%s", line);
-			free(line);
+			j++;
 		}
 	}
 	else
 		return (1);
-	close(fd);
+	for (int i = 0; i < 3; i++) {
+		close(fd[i]);
+	}
 	return (0);
 }

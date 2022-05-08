@@ -9,11 +9,15 @@
 CC = gcc
 BUF_DEF = -D BUFFER_SIZE=$(BS)
 CFLAGS = -Wall -Wextra -Werror $(BUF_DEF) -g -I $(GNL_PATH)
-NAME = exe
+NAME = mandatory
+BONUS = bonus
 
 GNL_SRCS = get_next_line.c get_next_line_utils.c
-SRCS = main.c $(addprefix $(GNL_PATH)/, $(GNL_SRCS))
-OBJS = $(SRCS:%.c=%.o)
+BONUS_SRCS = get_next_line_bonus.c get_next_line_utils_bonus.c
+M_SRCS = main.c $(addprefix $(GNL_PATH)/, $(GNL_SRCS))
+B_SRCS = bonus.c $(addprefix $(GNL_PATH)/, $(BONUS_SRCS))
+M_OBJS = $(M_SRCS:%.c=%.o)
+B_OBJS = $(B_SRCS:%.c=%.o)
 
 ifndef BS
 	BS=4
@@ -25,20 +29,28 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(M_OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(M_OBJS)
+
+bonus: $(B_OBJS)
+	$(CC) $(CFLAGS) -o $(BONUS) $(B_OBJS)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(B_OBJS) $(M_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS)
 
 re: fclean all
 
-test:
-	@make re
-	@echo "\n\n========\n"
-	@./exe
-	@echo "\n\n========\n"
-	leaks -q exe
+m: all
+	@echo "\n\n====Mandatory====\n"
+	@./mandatory
+	@echo "\n\n=================\n"
+	# leaks -q exe
+
+b: bonus
+	@echo "\n\n====Bonus====\n"
+	@./bonus
+	@echo "\n\n=============\n"
+	# leaks -q exe
