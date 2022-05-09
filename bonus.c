@@ -6,7 +6,7 @@
 /*   By: tharaguc <tharaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:33:53 by tharaguc          #+#    #+#             */
-/*   Updated: 2022/05/09 13:49:47 by tharaguc         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:01:39 by tharaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 			i = 0;
 			while (i < 3) {	
 				line[i] = get_next_line(fd[i]);
-				printf("test%i >> %s", i, line[i]);
+				printf("test%i >> %s\n", i, line[i]);
 				free(line[i]);
 				i++;
 			}
@@ -43,7 +43,7 @@ int	main(void)
 	for (int i = 0; i < 3; i++) {
 		close(fd[i]);
 	}
-	fflush(stdout);
+	// fflush(stdout);
 	printf("\n\n<leaks>\n");
 	system("leaks -q bonus");
 	return (0);
