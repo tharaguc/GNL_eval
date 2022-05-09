@@ -6,7 +6,7 @@
 /*   By: tharaguc <tharaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:36:44 by tharaguc          #+#    #+#             */
-/*   Updated: 2022/05/08 19:30:08 by tharaguc         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:17:07 by tharaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	fd = open("test.txt", O_RDONLY);
+	fd = open("test0.txt", O_RDONLY);
 	if (fd)
 	{
 		while (1)
@@ -39,5 +39,7 @@ int	main(void)
 	else
 		return (1);
 	close(fd);
+	printf("\n\n<leaks>\n");
+	system("leaks -q mandatory");
 	return (0);
 }

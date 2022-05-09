@@ -47,10 +47,8 @@ m: all
 	@echo "\n\n====Mandatory====\n"
 	@./mandatory
 	@echo "\n\n=================\n"
-	# leaks -q exe
 
 b: bonus
 	@echo "\n\n====Bonus====\n"
 	@./bonus
 	@echo "\n\n=============\n"
-	# leaks -q exe

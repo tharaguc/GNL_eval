@@ -6,7 +6,7 @@
 /*   By: tharaguc <tharaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:33:53 by tharaguc          #+#    #+#             */
-/*   Updated: 2022/05/08 19:53:06 by tharaguc         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:16:45 by tharaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int	main(void)
 	for (int i = 0; i < 3; i++) {
 		close(fd[i]);
 	}
+	printf("\n\n<leaks>\n");
+	system("leaks -q bonus");
 	return (0);
 }
